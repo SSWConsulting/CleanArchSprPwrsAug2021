@@ -28,6 +28,7 @@ namespace CaWorkshop.Application.TodoLists.Commands.CreateTodoList
                 .MaximumLength(240)
                 .NotEmpty()
                 .MustAsync(BeUniqueTitle)
+                    .WithErrorCode("UNIQUE_TITLE")
                     .WithMessage("The specified title already exists.");
         }
 

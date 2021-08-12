@@ -2,13 +2,12 @@
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
-using CaWorkshop.Application.TodoLists.Queries.GetTodoLists;
 
 namespace CaWorkshop.Application.Common.Mapping
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile(string profileName) : base(profileName)
+        public MappingProfile()
         {
             ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
         }

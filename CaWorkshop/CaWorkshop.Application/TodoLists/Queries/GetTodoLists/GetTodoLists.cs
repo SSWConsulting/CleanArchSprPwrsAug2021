@@ -1,4 +1,6 @@
-﻿using CaWorkshop.Application.Common.Interfaces;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using CaWorkshop.Application.Common.Interfaces;
 using CaWorkshop.Application.Common.Models;
 using CaWorkshop.Domain.Entities;
 using MediatR;
@@ -19,10 +21,12 @@ namespace CaWorkshop.Application.TodoLists.Queries.GetTodoLists
         : IRequestHandler<GetTodoListsQuery, TodosVm>
     {
         private readonly IApplicationDbContext _context;
+        private readonly IConfigurationProvider _configuration;
 
-        public GetTodoListsQueryHandler(IApplicationDbContext context)
+        public GetTodoListsQueryHandler(IApplicationDbContext context, IConfigurationProvider configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public async Task<TodosVm> Handle(
@@ -41,7 +45,7 @@ namespace CaWorkshop.Application.TodoLists.Queries.GetTodoLists
                     .ToList(),
 
                 Lists = await _context.TodoLists
-                    .Select(TodoListDto.Projection)
+                    .ProjectTo<TodoListDto>(_configuration)
                     .ToListAsync(cancellationToken)
             };
         }

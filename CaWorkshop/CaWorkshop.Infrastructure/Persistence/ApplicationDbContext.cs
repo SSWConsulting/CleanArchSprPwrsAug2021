@@ -1,15 +1,17 @@
 ﻿using System.Reflection;
+using CaWorkshop.Application.Common.Interfaces;
 using CaWorkshop.Domain.Entities;
 using CaWorkshop.Infrastructure.Identity;
 using CaWorkshop.Infrastructure.Persistence.Configurations;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Options;
 
 namespace CaWorkshop.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
     {
         public ApplicationDbContext(
             DbContextOptions options,

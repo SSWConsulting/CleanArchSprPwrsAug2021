@@ -20,8 +20,6 @@ namespace CaWorkshop.Application
             services.AddTransient(typeof(IPipelineBehavior<,>),
                 typeof(ValidationBehavior<,>));
 
-            //services.AddTransient(typeof(IRequestPreProcessor<>), typeof(LoggingBehaviour<>));
-
             return services;
         }
     }

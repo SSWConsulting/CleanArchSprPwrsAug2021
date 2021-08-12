@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using CaWorkshop.Application.Common.Interfaces;
 using CaWorkshop.Domain.Entities;
 using CaWorkshop.Infrastructure.Identity;
@@ -28,6 +29,15 @@ namespace CaWorkshop.Infrastructure.Persistence
             base.OnModelCreating(builder);
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+                .EnableDetailedErrors()
+                .LogTo(Console.WriteLine);
+
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }

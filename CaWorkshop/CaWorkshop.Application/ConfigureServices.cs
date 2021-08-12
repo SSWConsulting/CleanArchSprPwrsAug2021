@@ -3,6 +3,7 @@ using AutoMapper;
 using CaWorkshop.Application.Common.Behaviours;
 using FluentValidation;
 using MediatR;
+using MediatR.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CaWorkshop.Application
@@ -18,6 +19,8 @@ namespace CaWorkshop.Application
 
             services.AddTransient(typeof(IPipelineBehavior<,>),
                 typeof(ValidationBehavior<,>));
+
+            //services.AddTransient(typeof(IRequestPreProcessor<>), typeof(LoggingBehaviour<>));
 
             return services;
         }
